@@ -1,0 +1,32 @@
+var handleSubmit = function() {
+  var enterNumber = document.getElementById("monthNumber");
+  var enter = int(enterNumber.value);
+  // this array is unnecessary if use "SWITCH"
+  var months = new Array ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var output = document.getElementById("outputText");
+  // Verify
+  if(enter < 1 && enter > 12)
+  {
+    alert("Invalid Number");
+  }
+  else
+  {
+    switch(enter):
+      case 1:
+        // output.value if using textbox
+        output.innerHTML = "January";
+        break;
+      case 2:
+        output.innerHTML = "February";
+        break;
+      // keep going
+      case 12:
+        output = "December";
+        break;
+
+
+
+    // better than switch using array
+    output.innerHTML = months[(enter-1)]
+  }
+}
