@@ -5,6 +5,7 @@ import os
 class Node:
     def __init__(self, value):
         self.value = value
+        self.vertex = None
         self.parent = None
         self.left = None
         self.right = None
