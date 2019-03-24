@@ -20,14 +20,14 @@ class Heap:
         for value in arr[1:]:
             new_node = Node(value)
             self.nodes.append(new_node)
-            self.swap(i)
+            self.swap_with_parent(i)
             i += 1
 
     def parent(self, i):
         return self.nodes[int(np.floor(i/2))]
 
 
-    def swap(self, child_index):
+    def swap_with_parent(self, child_index):
         while self.nodes[int(np.floor(child_index/2))].value > self.nodes[child_index].value:
             parent_index = int(np.floor(child_index/2))
             self.swap_two_nodes(parent_index, child_index)
@@ -40,10 +40,7 @@ class Heap:
         self.nodes[parent_index] = self.nodes[child_index]
         self.nodes[child_index] = temp_node
 
-    def deleteMin(self):
-        self.swap_two_nodes(1, len(self.nodes) - 1)
-        self.nodes = self.nodes[:-1]
-        parent_index = 1
+    def swap_with_childrens(self, parent_index):
         while True:
             child_index = parent_index * 2
             if self.nodes[parent_index].value > self.nodes[child_index].value:
@@ -55,11 +52,27 @@ class Heap:
             else:
                 break
 
+    def deleteMin(self):
+        self.swap_two_nodes(1, len(self.nodes) - 1)
+        self.nodes = self.nodes[:-1]
+        parent_index = 1
+        self.swap_with_childrens(parent_index)
+
+    def changeValue(self, node, value_to_change):
+        # find node
+        index = 1
+        for n in self.nodes[1:]:
+            if n.equals(node):
+                break
+            index += 1
+        print(index)
+        self.nodes[index].value = value_to_change
+        self.swap_with_childrens(index)
 
 if __name__ == "__main__":
     data = Heap()
     data.constructHeap([35, 33, 42, 10, 14, 19, 27, 44, 26, 31])
 
-    data.deleteMin()
+    data.changeValue(Node(10),45)
     for n in data.nodes:
         print(n.value)
