@@ -26,8 +26,7 @@ class Dijkstra:
     def shortest_path(self, f, t):
         self.X.append(f)
         self.A[f] = 0
-        stop = False
-        while not stop:
+        while True:
             w_star = None
             v_star = None
             smallest = float('inf')
@@ -56,4 +55,3 @@ if __name__ == "__main__":
     for t in vertices:
         graph = Dijkstra("data.txt")
         graph.shortest_path(1, t)
-        
